@@ -14,12 +14,13 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
-        return view('group.index', compact('groups'));
+        return view('groups.index', compact('groups'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
+    // Создание новой группы
     public function create()
     {
         return view('groups.create');
@@ -31,7 +32,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
             'start_from' => 'required|date',
             'is_active' => 'boolean',
         ]);
@@ -48,9 +49,11 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // Отображение списка групп
+    public function show(Group $group)
     {
-        //
+        $students = $group->students;
+        return view('groups.show', compact('group', 'students'));
     }
 
     /**

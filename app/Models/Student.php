@@ -18,7 +18,7 @@ class Student extends Model
     protected $casts = [
         'group_id' => 'integer',
     ];
-
+    
     public function group()
     {
         // Студент может принадлежать к одной группе.

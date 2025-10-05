@@ -21,7 +21,7 @@ class StudentController extends Controller
      */
     public function create(Group $group)
     {
-        return view('students.create', compact('group'));
+        return view('students.create', ['group' => $group]);
     }
 
     /**
@@ -30,8 +30,8 @@ class StudentController extends Controller
     public function store(Request $request, Group $group)
     {
         $request->validate([
-            'surname' => 'required|string',
-            'name' => 'required|string',
+            'surname' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
         ]);
 
         Student::create([
