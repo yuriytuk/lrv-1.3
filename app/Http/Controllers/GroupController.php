@@ -34,16 +34,16 @@ class GroupController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'start_from' => 'required|date',
-            'is_active' => 'boolean',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         Group::create([
             'title' => $request->title,
             'start_from' => $request->start_from,
-            'is_active' => $request->is_active,
+            'is_active' => $request->boolean('is_active'),
         ]);
 
-        return redirect()->route('groups.index')->with('успешно', 'Группа создана.');
+        return redirect()->route('groups.index')->with('success', 'Группа создана.');
     }
 
     /**
